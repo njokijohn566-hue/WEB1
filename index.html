@@ -115,6 +115,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 20px;
+      position: relative;
     }
 
     .logo {
@@ -132,6 +133,18 @@
     .nav-links a {
       color: #f5d8df;
       font-size: 0.95rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: #ffd1dc;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
     }
 
     section {
@@ -324,12 +337,41 @@
       }
 
       .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .menu-toggle {
+        display: block;
       }
 
       .nav-links {
-        gap: 12px;
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 220px;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(10, 10, 10, 0.95);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        padding: 12px 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px 18px;
+        display: block;
+        width: 100%;
+      }
+
+      .nav-links a:hover {
+        background: rgba(255,255,255,0.05);
       }
     }
   </style>
@@ -349,7 +391,10 @@
   <nav>
     <div class="nav-inner">
       <div class="logo">❤️ Our Love Space</div>
-      <div class="nav-links">
+
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+      <div class="nav-links" id="navLinks">
         <a href="#story">Story</a>
         <a href="#reasons">Love Reasons</a>
         <a href="#gallery">Gallery</a>
@@ -365,7 +410,7 @@
   <!-- HERO -->
   <header>
     <div class="hero">
-      <h1>John ❤️ Her Name</h1>
+      <h1>❤️MAGGIE💍</h1>
       <p id="typing-text"></p>
 
       <div class="hero-buttons">
@@ -454,7 +499,7 @@
   </section>
 
   <!-- OUR MOMENTS -->
-  <section>
+  <section id="gallery">
     <h2>Our Moments</h2>
     <p class="section-subtitle">
       Some memories are too special for the public. I kept them somewhere safer.
@@ -610,6 +655,17 @@
   </footer>
 
   <script>
+    // MOBILE MENU
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("show");
+    }
+
+    document.querySelectorAll("#navLinks a").forEach(link => {
+      link.addEventListener("click", () => {
+        document.getElementById("navLinks").classList.remove("show");
+      });
+    });
+
     // MUSIC
     const music = document.getElementById("bg-music");
 
