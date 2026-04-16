@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Something Special</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.82)),
+    url("images/bg.jpg") center/cover no-repeat;
+  color: white;
+  padding: 30px 15px;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* GLOW */
+.glow {
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  background: rgba(255, 77, 109, 0.18);
+  filter: blur(130px);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.glow.one {
+  top: 8%;
+  left: 8%;
+}
+
+.glow.two {
+  bottom: 10%;
+  right: 8%;
+  background: rgba(255, 140, 170, 0.14);
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1080px;
+  margin: auto;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(12px);
+  border-radius: 28px;
+  padding: 28px 22px 35px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.28);
+  position: relative;
+  z-index: 2;
+}
+
+/* TITLE */
+h1 {
+  text-align: center;
+  color: #ffd1dc;
+  margin-bottom: 10px;
+  font-size: 2.2rem;
+}
+
+p {
+  text-align: center;
+  color: #f5d8df;
+  margin-bottom: 20px;
+}
+
+/* PASSWORD BOX */
+.lock-box {
+  text-align: center;
+  padding: 18px 0 10px;
+}
+
+input {
+  padding: 14px 16px;
+  border-radius: 999px;
+  border: none;
+  width: 240px;
+  max-width: 100%;
+  text-align: center;
+  outline: none;
+  background: rgba(255,255,255,0.92);
+  color: #111;
+  font-size: 0.98rem;
+}
+
+button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff4d6d, #ff758f);
+  color: white;
+  cursor: pointer;
+  margin-top: 12px;
+  font-weight: bold;
+  box-shadow: 0 10px 24px rgba(255,77,109,0.28);
+  transition: 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.hidden {
+  display: none;
+}
+
+#errorText {
+  color: #ffb3c2;
+  margin-top: 10px;
+  min-height: 20px;
+}
+
+/* HEAD TEXT BLOCKS */
+.text-block {
+  margin: 28px auto;
+  text-align: center;
+  line-height: 1.8;
+  color: #ffe8ee;
+  max-width: 760px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 18px 16px;
+  border-radius: 18px;
+}
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 18px;
+  transition: 0.35s ease;
+  border: 1px solid rgba(255,255,255,0.09);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+}
+
+.gallery img:hover {
+  transform: scale(1.04) translateY(-3px);
+}
+
+/* EXTRA MESSAGE */
+.deep-secret {
+  margin-top: 22px;
+  padding: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  display: none;
+  color: #ffe8ee;
+  line-height: 1.9;
+  text-align: left;
+  white-space: pre-line;
+}
+
+/* BACK LINK */
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #ffd1dc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-wrap {
+  text-align: center;
+}
+
+/* HEARTS */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  color: rgba(255, 120, 150, 0.75);
+  animation: floatUp linear infinite;
+  font-size: 20px;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery img {
+    height: 190px;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+  }
+
+  .container {
+    padding: 24px 16px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery img {
+    height: 160px;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<div class="container">
+
+  <h1>Something Special ✨</h1>
+  <p>This space is only for you.</p>
+
+  <!-- PASSWORD -->
+  <div class="lock-box" id="lockBox">
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <br>
+    <button onclick="checkPassword()">Unlock</button>
+    <p id="errorText"></p>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="content" class="hidden">
+
+    <h1>For Her Name ❤️</h1>
+
+    <div class="text-block">
+      A private collection of moments I never want to lose.
+    </div>
+
+    <!-- GALLERY -->
+    <div class="gallery">
+
+      <img src="photo1.jpg" alt="photo 1">
+      <img src="photo2.jpeg" alt="photo 2">
+      <img src="photo3.jpg" alt="photo 3">
+      <img src="photo4.jpg" alt="photo 4">
+
+      <img src="photo5.jpg" alt="photo 5">
+      <img src="photo6.jpg" alt="photo 6">
+      <img src="photo7.jpeg" alt="photo 7">
+      <img src="photo8.jpg" alt="photo 8">
+
+      <img src="photo9.jpg" alt="photo 9">
+      <img src="photo10.jpeg" alt="photo 10">
+      <img src="photo11.jpg" alt="photo 11">
+      <img src="IMG_20250722_121450.jpg" alt="photo 12">
+
+      <img src="3M6A2261.jpg" alt="photo 13">
+      <img src="3M6A2458.jpg" alt="photo 14">
+      <img src="3M6A2460.jpg" alt="photo 15">
+      <img src="IMG_20250605_161738.jpg" alt="photo 16">
+
+    </div>
+
+    <div class="text-block">
+      These are not just pictures. They are memories, feelings, and pieces of something real.
+    </div>
+
+    <!-- EXTRA SECRET -->
+    <div style="text-align:center;">
+      <button onclick="showSecret()">Touch me baby 👀</button>
+    </div>
+
+    <div class="deep-secret" id="extra">❤️Out of everyone I have ever met,
+you are the one who stayed differently in my heart.
+
+Not because you tried,
+but because being you was already enough.
+
+There are moments I don’t say much,
+but inside, there is so much I feel for you.
+
+You became someone I value quietly,
+but deeply.
+
+And if I had to choose again,
+with everything I know now…
+
+I would still choose you. 💖</div>
+
+    <div class="back-wrap">
+      <a href="index.html" class="back-link">← Back to our main page</a>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const correctPassword = "ourlove";
+
+function checkPassword() {
+  const input = document.getElementById("passwordInput").value;
+
+  if (input === correctPassword) {
+    document.getElementById("lockBox").style.display = "none";
+    document.getElementById("content").classList.remove("hidden");
+  } else {
+    document.getElementById("errorText").innerText = "Wrong password ❤️";
+  }
+}
+
+function showSecret() {
+  document.getElementById("extra").style.display = "block";
+}
+
+// floating hearts
+function createHearts() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 18 + 14 + "px";
+  heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 7000);
+}
+
+setInterval(createHearts, 450);
+</script>
+
+</body>
+</html>
