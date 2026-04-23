@@ -16,10 +16,11 @@
     body {
       font-family: Arial, sans-serif;
       background:
-        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+        linear-gradient(rgba(20,0,40,0.72), rgba(8,0,22,0.88)),
         url("images/bg.jpg") center/cover no-repeat;
       color: white;
       overflow-x: hidden;
+      position: relative;
     }
 
     a {
@@ -36,7 +37,7 @@
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.65)),
+        linear-gradient(rgba(18,0,40,0.55), rgba(8,0,25,0.75)),
         url("images/hero.jpg") center/cover no-repeat;
     }
 
@@ -54,14 +55,14 @@
     .hero h1 {
       font-size: 3.8rem;
       margin-bottom: 18px;
-      color: #ffd1dc;
+      color: #e6d4ff;
       letter-spacing: 1px;
     }
 
     .hero p {
       font-size: 1.25rem;
       margin-bottom: 25px;
-      color: #ffe6ec;
+      color: #efe5ff;
       min-height: 42px;
       line-height: 1.7;
     }
@@ -76,14 +77,14 @@
     .btn {
       display: inline-block;
       padding: 14px 28px;
-      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      background: linear-gradient(135deg, #7b2ff7, #b245ff);
       color: white;
       border: none;
       border-radius: 999px;
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s ease;
-      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.28);
+      box-shadow: 0 8px 20px rgba(123, 47, 247, 0.28);
     }
 
     .btn:hover {
@@ -103,7 +104,7 @@
       width: 100%;
       z-index: 999;
       backdrop-filter: blur(12px);
-      background: rgba(10, 10, 10, 0.35);
+      background: rgba(18, 6, 40, 0.45);
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
@@ -120,7 +121,7 @@
 
     .logo {
       font-weight: bold;
-      color: #ffd1dc;
+      color: #dcc4ff;
       font-size: 1.05rem;
     }
 
@@ -131,7 +132,7 @@
     }
 
     .nav-links a {
-      color: #f5d8df;
+      color: #efe5ff;
       font-size: 0.95rem;
     }
 
@@ -139,7 +140,7 @@
       display: none;
       background: transparent;
       border: none;
-      color: #ffd1dc;
+      color: #dcc4ff;
       font-size: 1.8rem;
       cursor: pointer;
       box-shadow: none;
@@ -154,6 +155,8 @@
       opacity: 0;
       transform: translateY(40px);
       transition: 0.8s ease;
+      position: relative;
+      z-index: 2;
     }
 
     section.show {
@@ -165,14 +168,14 @@
       text-align: center;
       font-size: 2.4rem;
       margin-bottom: 30px;
-      color: #ffd1dc;
+      color: #dcc4ff;
     }
 
     .section-subtitle {
       text-align: center;
       max-width: 700px;
       margin: 0 auto 35px;
-      color: #f5d8df;
+      color: #efe5ff;
       line-height: 1.7;
     }
 
@@ -196,7 +199,7 @@
     }
 
     .timeline-card {
-      border-left: 4px solid #ff5f7d;
+      border-left: 4px solid #9b5cff;
     }
 
     .timeline-card h3,
@@ -204,7 +207,7 @@
     .open-item h3,
     .reason-item h3 {
       margin-bottom: 12px;
-      color: #ffe6ec;
+      color: #efe5ff;
     }
 
     .timeline-card p,
@@ -213,7 +216,7 @@
     .reason-item p,
     .letter-card p {
       line-height: 1.8;
-      color: #f9e7ec;
+      color: #f6efff;
     }
 
     .gallery {
@@ -245,12 +248,12 @@
 
     .counter-box h3 {
       font-size: 2rem;
-      color: #ffbdd0;
+      color: #d8c0ff;
       margin-bottom: 10px;
     }
 
     .counter-box p {
-      color: #f6d9e1;
+      color: #efe5ff;
     }
 
     .letter-card {
@@ -272,13 +275,13 @@
       display: none;
       margin-top: 18px;
       font-size: 1.15rem;
-      color: #ffe3ea;
+      color: #f3eaff;
       line-height: 1.8;
     }
 
     .music-note {
       text-align: center;
-      color: #f7d7e0;
+      color: #eadbff;
       margin-top: 16px;
       font-size: 0.96rem;
     }
@@ -286,13 +289,15 @@
     footer {
       text-align: center;
       padding: 35px 20px 50px;
-      color: #e8cbd3;
+      color: #e6d8ff;
+      position: relative;
+      z-index: 2;
     }
 
     .heart {
       position: fixed;
       bottom: -20px;
-      color: rgba(255, 105, 135, 0.72);
+      color: rgba(180, 120, 255, 0.72);
       animation: floatUp linear infinite;
       font-size: 20px;
       user-select: none;
@@ -304,12 +309,44 @@
       position: fixed;
       width: 300px;
       height: 300px;
-      background: rgba(255, 77, 109, 0.2);
+      background: rgba(123, 47, 247, 0.22);
       filter: blur(120px);
       border-radius: 50%;
       top: 10%;
       left: 10%;
       z-index: -1;
+    }
+
+    .bubble-wrap {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.28), rgba(178,69,255,0.12), rgba(123,47,247,0.05));
+      border: 1px solid rgba(220,196,255,0.12);
+      animation: bubbleUp linear infinite;
+      backdrop-filter: blur(3px);
+    }
+
+    @keyframes bubbleUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.55;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.2);
+        opacity: 0;
+      }
     }
 
     @keyframes floatUp {
@@ -321,6 +358,56 @@
         transform: translateY(-110vh) scale(1.6);
         opacity: 0;
       }
+    }
+
+    /* LOVE GAME */
+    #gameArea {
+      text-align: center;
+    }
+
+    #gameScore {
+      font-size: 1.15rem;
+      color: #f3eaff;
+      margin-bottom: 18px;
+    }
+
+    .game-note {
+      color: #efe5ff;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto 20px;
+      text-align: center;
+    }
+
+    .game-heart {
+      position: fixed;
+      top: -40px;
+      font-size: 28px;
+      cursor: pointer;
+      animation: fall linear forwards;
+      z-index: 3;
+      user-select: none;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(-10vh);
+      }
+      to {
+        transform: translateY(110vh);
+      }
+    }
+
+    #gameUnlock {
+      display: none;
+      margin-top: 22px;
+      color: #f3eaff;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    #gameUnlock.show {
+      display: block;
     }
 
     @media (max-width: 768px) {
@@ -353,7 +440,7 @@
         width: 220px;
         flex-direction: column;
         gap: 0;
-        background: rgba(10, 10, 10, 0.95);
+        background: rgba(18, 6, 40, 0.96);
         border: 1px solid rgba(255,255,255,0.08);
         border-radius: 16px;
         padding: 12px 0;
@@ -379,7 +466,20 @@
 <body>
 
   <div class="glow"></div>
-  <div class="glow" style="top: 60%; left: 70%; background: rgba(255,120,150,0.15);"></div>
+  <div class="glow" style="top: 60%; left: 70%; background: rgba(178,69,255,0.18);"></div>
+
+  <div class="bubble-wrap">
+    <span class="bubble" style="left: 5%; width: 40px; height: 40px; animation-duration: 16s; animation-delay: 0s;"></span>
+    <span class="bubble" style="left: 12%; width: 70px; height: 70px; animation-duration: 20s; animation-delay: 2s;"></span>
+    <span class="bubble" style="left: 20%; width: 28px; height: 28px; animation-duration: 14s; animation-delay: 1s;"></span>
+    <span class="bubble" style="left: 30%; width: 55px; height: 55px; animation-duration: 19s; animation-delay: 4s;"></span>
+    <span class="bubble" style="left: 42%; width: 85px; height: 85px; animation-duration: 24s; animation-delay: 3s;"></span>
+    <span class="bubble" style="left: 52%; width: 36px; height: 36px; animation-duration: 15s; animation-delay: 6s;"></span>
+    <span class="bubble" style="left: 63%; width: 65px; height: 65px; animation-duration: 22s; animation-delay: 1.5s;"></span>
+    <span class="bubble" style="left: 74%; width: 30px; height: 30px; animation-duration: 13s; animation-delay: 5s;"></span>
+    <span class="bubble" style="left: 84%; width: 75px; height: 75px; animation-duration: 21s; animation-delay: 2.5s;"></span>
+    <span class="bubble" style="left: 92%; width: 42px; height: 42px; animation-duration: 17s; animation-delay: 4.5s;"></span>
+  </div>
 
   <!-- MUSIC -->
   <audio id="bg-music" loop>
@@ -639,6 +739,22 @@
     </div>
   </section>
 
+  <!-- LOVE GAME -->
+  <section id="love-game">
+    <h2>Catch My Love ❤️</h2>
+    <p class="section-subtitle">
+      Tap the falling hearts and see what unlocks for you.
+    </p>
+
+    <div class="card" id="gameArea">
+      <p id="gameScore">Score: <span id="score">0</span></p>
+      <p class="game-note">
+        Catch as many hearts as you can. At 10 and 20, something sweet unlocks.
+      </p>
+      <div id="gameUnlock"></div>
+    </div>
+  </section>
+
   <!-- SURPRISE -->
   <section id="surprise">
     <h2>A Little Surprise</h2>
@@ -733,6 +849,42 @@
 
       alert(message);
     }
+
+    // LOVE GAME
+    let score = 0;
+
+    function createGameHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("game-heart");
+      heart.innerHTML = "💜";
+      heart.style.left = Math.random() * 90 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 2.5) + "s";
+      document.body.appendChild(heart);
+
+      heart.onclick = () => {
+        score++;
+        document.getElementById("score").innerText = score;
+        heart.remove();
+
+        if (score === 10) {
+          const unlock = document.getElementById("gameUnlock");
+          unlock.classList.add("show");
+          unlock.innerHTML = "You unlocked my first truth: even on normal days, my heart still finds you first. 💜";
+        }
+
+        if (score === 20) {
+          const unlock = document.getElementById("gameUnlock");
+          unlock.classList.add("show");
+          unlock.innerHTML = "You unlocked the deeper truth: no matter how many hearts you catch, the real one has been yours for a long time. ❤️";
+        }
+      };
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createGameHeart, 900);
 
     // SURPRISE MESSAGE
     function showSecretMessage() {
