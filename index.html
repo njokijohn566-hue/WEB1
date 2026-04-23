@@ -3,911 +3,1019 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Love Story</title>
+  <title>Our Love Story 💜</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
+    :root {
+      --purple: #7b2ff7;
+      --purple-soft: #9b5cff;
+      --lavender: #dcc4ff;
+      --deep: #0e0020;
+      --card-bg: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.10);
     }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: Arial, sans-serif;
-      background:
-        linear-gradient(rgba(20,0,40,0.72), rgba(8,0,22,0.88)),
-        url("images/bg.jpg") center/cover no-repeat;
+      font-family: 'DM Sans', sans-serif;
+      background: radial-gradient(ellipse at 20% 20%, #1a003a 0%, #0e0020 50%, #05000f 100%);
       color: white;
       overflow-x: hidden;
-      position: relative;
+      min-height: 100vh;
     }
 
-    a {
-      text-decoration: none;
+    /* ── FLOATING PARTICLES ── */
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(155,92,255,0.35), transparent);
+      animation: drift linear infinite;
+    }
+    @keyframes drift {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.6; }
+      100% { transform: translateY(-20vh) scale(1.4); opacity: 0; }
     }
 
+    /* ── FLOATING HEARTS ── */
+    .floaty-heart {
+      position: fixed;
+      font-size: 18px;
+      animation: floatUp linear forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(0) rotate(0deg); opacity: 1; }
+      to   { transform: translateY(-100vh) rotate(20deg); opacity: 0; }
+    }
+
+    /* ── HERO ── */
     header {
       min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      text-align: center;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-      background:
-        linear-gradient(rgba(18,0,40,0.55), rgba(8,0,25,0.75)),
-        url("images/hero.jpg") center/cover no-repeat;
-    }
-
-    .hero {
-      z-index: 2;
-      max-width: 900px;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.35);
-    }
-
-    .hero h1 {
-      font-size: 3.8rem;
-      margin-bottom: 18px;
-      color: #e6d4ff;
-      letter-spacing: 1px;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      margin-bottom: 25px;
-      color: #efe5ff;
-      min-height: 42px;
-      line-height: 1.7;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 15px;
       justify-content: center;
-      flex-wrap: wrap;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 2;
     }
 
-    .btn {
+    .hero-inner {
+      max-width: 700px;
+    }
+
+    .hero-inner h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      color: var(--lavender);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-shadow: 0 0 60px rgba(155,92,255,0.5);
+    }
+
+    .hero-inner h1 span {
+      font-style: italic;
+      color: #f0e0ff;
+    }
+
+    .hero-inner p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 36px;
+      line-height: 1.8;
+    }
+
+    .start-btn {
       display: inline-block;
-      padding: 14px 28px;
+      padding: 16px 40px;
       background: linear-gradient(135deg, #7b2ff7, #b245ff);
       color: white;
       border: none;
       border-radius: 999px;
-      font-weight: bold;
+      font-size: 1.05rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: 0.3s ease;
-      box-shadow: 0 8px 20px rgba(123, 47, 247, 0.28);
+      transition: 0.3s;
+      box-shadow: 0 10px 35px rgba(123,47,247,0.45);
+      font-family: 'DM Sans', sans-serif;
     }
 
-    .btn:hover {
-      transform: translateY(-2px) scale(1.03);
+    .start-btn:hover { transform: translateY(-3px) scale(1.03); }
+
+    /* ── JOURNEY (chapters) ── */
+    #journey { position: relative; z-index: 2; }
+
+    .chapter {
+      max-width: 860px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
     }
 
-    .btn-outline {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.22);
-      box-shadow: none;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 999;
+    /* Locked chapter */
+    .chapter-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      overflow: hidden;
       backdrop-filter: blur(12px);
-      background: rgba(18, 6, 40, 0.45);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      transition: 0.6s ease;
     }
 
-    .nav-inner {
-      max-width: 1100px;
-      margin: auto;
-      padding: 14px 20px;
+    .chapter-header {
+      padding: 32px 36px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 20px;
-      position: relative;
+      cursor: default;
     }
 
-    .logo {
-      font-weight: bold;
-      color: #dcc4ff;
-      font-size: 1.05rem;
+    .chapter-icon { font-size: 2.4rem; }
+
+    .chapter-label {
+      flex: 1;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
+    .chapter-label h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.85rem;
+      color: var(--lavender);
+      margin-bottom: 6px;
     }
 
-    .nav-links a {
-      color: #efe5ff;
+    .chapter-label p {
+      color: rgba(255,255,255,0.55);
       font-size: 0.95rem;
     }
 
-    .menu-toggle {
+    .lock-badge {
+      background: rgba(123,47,247,0.25);
+      border: 1px solid rgba(155,92,255,0.35);
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      color: var(--lavender);
+      text-align: center;
+      min-width: 110px;
+    }
+
+    .lock-badge .lock-icon { font-size: 1.4rem; display: block; margin-bottom: 3px; }
+
+    /* Game zone */
+    .game-zone {
+      border-top: 1px solid var(--border);
+      padding: 28px 36px;
+      text-align: center;
+    }
+
+    .game-zone h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--lavender);
+      margin-bottom: 6px;
+    }
+
+    .game-zone .game-desc {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+    }
+
+    /* Content zone (hidden until unlocked) */
+    .content-zone {
       display: none;
-      background: transparent;
-      border: none;
-      color: #dcc4ff;
-      font-size: 1.8rem;
-      cursor: pointer;
-      box-shadow: none;
-      padding: 0;
-      margin: 0;
+      border-top: 1px solid var(--border);
+      padding: 32px 36px;
+      animation: contentReveal 0.7s ease forwards;
     }
 
-    section {
-      max-width: 1050px;
-      margin: auto;
-      padding: 90px 20px;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: 0.8s ease;
+    .content-zone.show { display: block; }
+
+    @keyframes contentReveal {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .content-zone p, .content-zone li {
+      color: rgba(255,255,255,0.82);
+      line-height: 1.85;
+      font-size: 1.0rem;
+    }
+
+    .content-zone h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--lavender);
+      font-size: 1.2rem;
+      margin: 20px 0 8px;
+    }
+
+    .unlocked-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(100,200,100,0.15);
+      border: 1px solid rgba(100,220,100,0.25);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      color: #a8ffb0;
+      margin-bottom: 20px;
+    }
+
+    /* ─── GAME: WORD SCRAMBLE ─── */
+    .scramble-word {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      letter-spacing: 12px;
+      color: #f0e0ff;
+      margin: 10px 0 20px;
+      text-shadow: 0 0 20px rgba(155,92,255,0.5);
+    }
+
+    .scramble-input {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 12px 24px;
+      color: white;
+      font-size: 1.1rem;
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      outline: none;
+      transition: 0.3s;
+      width: 240px;
+    }
+
+    .scramble-input:focus { border-color: var(--purple-soft); background: rgba(255,255,255,0.12); }
+
+    .hint-text { color: rgba(255,255,255,0.4); font-size: 0.82rem; margin-top: 10px; }
+
+    /* ─── GAME: TAP HEARTS ─── */
+    .tap-arena {
       position: relative;
-      z-index: 2;
-    }
-
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    h2 {
-      text-align: center;
-      font-size: 2.4rem;
-      margin-bottom: 30px;
-      color: #dcc4ff;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 35px;
-      color: #efe5ff;
-      line-height: 1.7;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
-      padding: 24px;
-      margin: 18px 0;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    }
-
-    .timeline-grid,
-    .memory-grid,
-    .open-grid,
-    .reason-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-
-    .timeline-card {
-      border-left: 4px solid #9b5cff;
-    }
-
-    .timeline-card h3,
-    .memory-item h3,
-    .open-item h3,
-    .reason-item h3 {
-      margin-bottom: 12px;
-      color: #efe5ff;
-    }
-
-    .timeline-card p,
-    .memory-item p,
-    .open-item p,
-    .reason-item p,
-    .letter-card p {
-      line-height: 1.8;
-      color: #f6efff;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .gallery img {
-      width: 100%;
-      height: 290px;
-      object-fit: cover;
+      height: 160px;
+      background: rgba(255,255,255,0.03);
       border-radius: 18px;
-      transition: 0.35s ease;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.22);
-    }
-
-    .gallery img:hover {
-      transform: scale(1.03);
-    }
-
-    .counter-wrap {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 18px;
-      text-align: center;
-    }
-
-    .counter-box h3 {
-      font-size: 2rem;
-      color: #d8c0ff;
-      margin-bottom: 10px;
-    }
-
-    .counter-box p {
-      color: #efe5ff;
-    }
-
-    .letter-card {
-      max-width: 820px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .open-item button {
-      margin-top: 16px;
-      width: 100%;
-    }
-
-    .surprise-box {
-      text-align: center;
-    }
-
-    #secretMessage {
-      display: none;
-      margin-top: 18px;
-      font-size: 1.15rem;
-      color: #f3eaff;
-      line-height: 1.8;
-    }
-
-    .music-note {
-      text-align: center;
-      color: #eadbff;
-      margin-top: 16px;
-      font-size: 0.96rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 35px 20px 50px;
-      color: #e6d8ff;
-      position: relative;
-      z-index: 2;
-    }
-
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      color: rgba(180, 120, 255, 0.72);
-      animation: floatUp linear infinite;
-      font-size: 20px;
-      user-select: none;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .glow {
-      position: fixed;
-      width: 300px;
-      height: 300px;
-      background: rgba(123, 47, 247, 0.22);
-      filter: blur(120px);
-      border-radius: 50%;
-      top: 10%;
-      left: 10%;
-      z-index: -1;
-    }
-
-    .bubble-wrap {
-      position: fixed;
-      inset: 0;
+      border: 1px dashed rgba(255,255,255,0.12);
       overflow: hidden;
-      pointer-events: none;
-      z-index: 0;
+      cursor: crosshair;
+      user-select: none;
+      margin-bottom: 14px;
     }
 
-    .bubble {
+    .tap-target {
       position: absolute;
-      bottom: -120px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.28), rgba(178,69,255,0.12), rgba(123,47,247,0.05));
-      border: 1px solid rgba(220,196,255,0.12);
-      animation: bubbleUp linear infinite;
-      backdrop-filter: blur(3px);
-    }
-
-    @keyframes bubbleUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.55;
-      }
-      100% {
-        transform: translateY(-120vh) scale(1.2);
-        opacity: 0;
-      }
-    }
-
-    @keyframes floatUp {
-      from {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-110vh) scale(1.6);
-        opacity: 0;
-      }
-    }
-
-    /* LOVE GAME */
-    #gameArea {
-      text-align: center;
-    }
-
-    #gameScore {
-      font-size: 1.15rem;
-      color: #f3eaff;
-      margin-bottom: 18px;
-    }
-
-    .game-note {
-      color: #efe5ff;
-      line-height: 1.8;
-      max-width: 700px;
-      margin: 0 auto 20px;
-      text-align: center;
-    }
-
-    .game-heart {
-      position: fixed;
-      top: -40px;
       font-size: 28px;
       cursor: pointer;
-      animation: fall linear forwards;
-      z-index: 3;
+      transition: transform 0.1s;
+      animation: popIn 0.3s ease;
       user-select: none;
     }
 
-    @keyframes fall {
-      from {
-        transform: translateY(-10vh);
-      }
-      to {
-        transform: translateY(110vh);
-      }
+    @keyframes popIn {
+      from { transform: scale(0); }
+      to   { transform: scale(1); }
     }
 
-    #gameUnlock {
-      display: none;
-      margin-top: 22px;
-      color: #f3eaff;
-      line-height: 1.8;
+    .tap-target:active { transform: scale(0.7); }
+
+    .tap-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .tap-bar {
+      flex: 1;
+      max-width: 200px;
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .tap-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #7b2ff7, #f472b6);
+      border-radius: 99px;
+      transition: width 0.3s;
+    }
+
+    /* ─── GAME: MATCH CARDS ─── */
+    .match-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-width: 400px;
+      margin: 0 auto 14px;
+    }
+
+    .match-card {
+      aspect-ratio: 1;
+      background: rgba(123,47,247,0.2);
+      border: 1px solid rgba(155,92,255,0.25);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      cursor: pointer;
+      transition: 0.25s;
+      user-select: none;
+    }
+
+    .match-card.flipped {
+      background: rgba(155,92,255,0.35);
+      border-color: rgba(220,196,255,0.45);
+    }
+
+    .match-card.matched {
+      background: rgba(100,200,100,0.2);
+      border-color: rgba(100,220,100,0.35);
+      cursor: default;
+      animation: matchPop 0.4s ease;
+    }
+
+    @keyframes matchPop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .match-card.back { opacity: 0; }
+
+    /* ─── GAME: QUIZ ─── */
+    .quiz-question {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .quiz-opt {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      transition: 0.25s;
+    }
+
+    .quiz-opt:hover { background: rgba(123,47,247,0.25); border-color: rgba(155,92,255,0.4); }
+    .quiz-opt.correct { background: rgba(100,200,100,0.2); border-color: rgba(100,220,100,0.5); color: #a8ffb0; }
+    .quiz-opt.wrong   { background: rgba(220,60,60,0.2);  border-color: rgba(220,60,60,0.4);  color: #ffa8a8; }
+
+    /* ─── GAME: FILL LOVE ─── */
+    .love-meter-wrap { margin-bottom: 16px; }
+
+    .love-meter {
+      width: 100%;
+      height: 20px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .love-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #7b2ff7, #f472b6, #ff9de2);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    .love-count { color: var(--lavender); font-size: 0.9rem; }
+
+    .click-btn {
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #7b2ff7, #b245ff);
+      border: none;
+      border-radius: 999px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: 0.3s;
+      box-shadow: 0 8px 24px rgba(123,47,247,0.4);
+    }
+
+    .click-btn:hover { transform: translateY(-2px); }
+    .click-btn:active { transform: scale(0.96); }
+
+    /* ─── GAME: TYPE IT ─── */
+    .type-prompt {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--lavender);
+      margin-bottom: 16px;
+    }
+
+    .type-display {
+      font-size: 1.0rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 6px;
+      margin-bottom: 14px;
+      min-height: 28px;
+    }
+
+    .type-display span.typed { color: #f0e0ff; }
+    .type-display span.cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--purple-soft);
+      animation: blink 1s infinite;
+      vertical-align: text-bottom;
+      margin-left: 2px;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+    /* shared game feedback */
+    .game-feedback {
+      margin-top: 12px;
+      min-height: 24px;
+      font-size: 0.88rem;
+      color: #ffa8d4;
+      transition: 0.3s;
+    }
+
+    .game-feedback.good { color: #a8ffb0; }
+
+    /* ── CONTENT CARD ITEMS ── */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .c-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .c-item h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--lavender);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .c-item p { font-size: 0.93rem; }
+
+    .letter-body {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 28px 32px;
+      font-size: 1.05rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ── FOOTER ── */
+    footer {
       text-align: center;
+      padding: 60px 20px;
+      color: rgba(255,255,255,0.4);
+      position: relative;
+      z-index: 2;
+      font-size: 0.9rem;
     }
 
-    #gameUnlock.show {
-      display: block;
+    footer span { color: #b245ff; }
+
+    /* confetti pop */
+    .confetti-piece {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      pointer-events: none;
+      animation: confettiFall 1.4s ease forwards;
+      z-index: 999;
     }
 
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.4rem;
-      }
+    @keyframes confettiFall {
+      0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(80px) rotate(360deg); opacity: 0; }
+    }
 
-      .hero p {
-        font-size: 1.05rem;
-      }
-
-      h2 {
-        font-size: 2rem;
-      }
-
-      .nav-inner {
-        flex-direction: row;
-        align-items: center;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        width: 220px;
-        flex-direction: column;
-        gap: 0;
-        background: rgba(18, 6, 40, 0.96);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 16px;
-        padding: 12px 0;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      }
-
-      .nav-links.show {
-        display: flex;
-      }
-
-      .nav-links a {
-        padding: 12px 18px;
-        display: block;
-        width: 100%;
-      }
-
-      .nav-links a:hover {
-        background: rgba(255,255,255,0.05);
-      }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .chapter-header { flex-wrap: wrap; padding: 24px 20px; }
+      .game-zone, .content-zone { padding: 24px 20px; }
+      .match-grid { grid-template-columns: repeat(4,1fr); gap: 8px; }
+      .quiz-options { grid-template-columns: 1fr; }
+      .scramble-word { font-size: 1.8rem; letter-spacing: 8px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="glow"></div>
-  <div class="glow" style="top: 60%; left: 70%; background: rgba(178,69,255,0.18);"></div>
+<div class="particles" id="particles"></div>
 
-  <div class="bubble-wrap">
-    <span class="bubble" style="left: 5%; width: 40px; height: 40px; animation-duration: 16s; animation-delay: 0s;"></span>
-    <span class="bubble" style="left: 12%; width: 70px; height: 70px; animation-duration: 20s; animation-delay: 2s;"></span>
-    <span class="bubble" style="left: 20%; width: 28px; height: 28px; animation-duration: 14s; animation-delay: 1s;"></span>
-    <span class="bubble" style="left: 30%; width: 55px; height: 55px; animation-duration: 19s; animation-delay: 4s;"></span>
-    <span class="bubble" style="left: 42%; width: 85px; height: 85px; animation-duration: 24s; animation-delay: 3s;"></span>
-    <span class="bubble" style="left: 52%; width: 36px; height: 36px; animation-duration: 15s; animation-delay: 6s;"></span>
-    <span class="bubble" style="left: 63%; width: 65px; height: 65px; animation-duration: 22s; animation-delay: 1.5s;"></span>
-    <span class="bubble" style="left: 74%; width: 30px; height: 30px; animation-duration: 13s; animation-delay: 5s;"></span>
-    <span class="bubble" style="left: 84%; width: 75px; height: 75px; animation-duration: 21s; animation-delay: 2.5s;"></span>
-    <span class="bubble" style="left: 92%; width: 42px; height: 42px; animation-duration: 17s; animation-delay: 4.5s;"></span>
+<!-- ══ HERO ══ -->
+<header>
+  <div class="hero-inner">
+    <h1>For <span>Maggie</span> 💜</h1>
+    <p>This little journey is just for you.<br>Each chapter of us is waiting behind a tiny game.<br>Play your way through — my heart is at the end.</p>
+    <button class="start-btn" onclick="startJourney()">Begin Our Story ✨</button>
+  </div>
+</header>
+
+<!-- ══ JOURNEY ══ -->
+<div id="journey" style="display:none; padding: 20px 0 40px;">
+
+  <!-- ── CHAPTER 1: OUR STORY ── tap hearts game -->
+  <div class="chapter" id="ch1">
+    <div class="chapter-card">
+      <div class="chapter-header">
+        <div class="chapter-icon">📖</div>
+        <div class="chapter-label">
+          <h2>Our Story</h2>
+          <p>How two people became one beautiful thing.</p>
+        </div>
+        <div class="lock-badge" id="lock1">
+          <span class="lock-icon">🔒</span>
+          Locked
+        </div>
+      </div>
+
+      <div class="game-zone" id="game1">
+        <h3>Tap the Hearts! 💜</h3>
+        <p class="game-desc">Catch <strong>10 hearts</strong> before they disappear to unlock this chapter.</p>
+        <div class="tap-arena" id="tapArena1"></div>
+        <div class="tap-progress">
+          <span>0</span>
+          <div class="tap-bar"><div class="tap-fill" id="tapFill1" style="width:0%"></div></div>
+          <span>10</span>
+        </div>
+        <div class="game-feedback" id="fb1">Click the hearts as fast as you can! 💨</div>
+      </div>
+
+      <div class="content-zone" id="content1">
+        <div class="unlocked-badge">✨ Chapter Unlocked!</div>
+        <div class="content-grid">
+          <div class="c-item">
+            <h4>How We Met</h4>
+            <p>It all started with one moment that looked simple from the outside, but deep down it changed everything. That was the beginning of something beautiful.</p>
+          </div>
+          <div class="c-item">
+            <h4>Our First Connection</h4>
+            <p>The conversations became longer, the smiles became softer, and suddenly your presence started to feel like home.</p>
+          </div>
+          <div class="c-item">
+            <h4>Falling in Love</h4>
+            <p>Somewhere between the laughter, the care, and the little moments, my heart made a decision. It chose you.</p>
+          </div>
+          <div class="c-item">
+            <h4>Still Us</h4>
+            <p>And now here we are — still growing, still loving, still creating memories I never want to lose.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- MUSIC -->
-  <audio id="bg-music" loop>
-    <source src="love.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+  <!-- ── CHAPTER 2: REASONS I LOVE YOU ── word scramble -->
+  <div class="chapter" id="ch2">
+    <div class="chapter-card">
+      <div class="chapter-header">
+        <div class="chapter-icon">💌</div>
+        <div class="chapter-label">
+          <h2>Why I Love You</h2>
+          <p>The list is endless. Here are just a few.</p>
+        </div>
+        <div class="lock-badge" id="lock2">
+          <span class="lock-icon">🔒</span>
+          Locked
+        </div>
+      </div>
 
-  <!-- NAVBAR -->
-  <nav>
-    <div class="nav-inner">
-      <div class="logo">❤️ Our Love Space</div>
+      <div class="game-zone" id="game2">
+        <h3>Unscramble the Word 🔤</h3>
+        <p class="game-desc">Figure out what this scrambled love word is.</p>
+        <div class="scramble-word" id="scrambleDisplay">M A G G I E</div>
+        <div><input class="scramble-input" id="scrambleInput" placeholder="Type your answer…" autocomplete="off" oninput="checkScramble(this.value)"></div>
+        <div class="hint-text" id="scrambleHint">Hint: She's the most beautiful girl I know 😍</div>
+        <div class="game-feedback" id="fb2"></div>
+      </div>
 
-      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-      <div class="nav-links" id="navLinks">
-        <a href="#story">Story</a>
-        <a href="#reasons">Love Reasons</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#memories">Memories</a>
-        <a href="#counter">Us</a>
-        <a href="#letter">Letter</a>
-        <a href="#open-when">Open When</a>
-        <a href="#surprise">Surprise</a>
+      <div class="content-zone" id="content2">
+        <div class="unlocked-badge">✨ Chapter Unlocked!</div>
+        <div class="content-grid">
+          <div class="c-item">
+            <h4>Your Smile</h4>
+            <p>It changes my whole mood and makes even an ordinary day feel beautiful.</p>
+          </div>
+          <div class="c-item">
+            <h4>Your Heart</h4>
+            <p>The way you care, love, and show up makes you rare in the very best way.</p>
+          </div>
+          <div class="c-item">
+            <h4>Your Presence</h4>
+            <p>You bring peace, comfort, and a kind of warmth that words struggle to explain.</p>
+          </div>
+          <div class="c-item">
+            <h4>The Way You Love</h4>
+            <p>With you, love feels genuine, soft, strong, and worth protecting forever.</p>
+          </div>
+          <div class="c-item">
+            <h4>Your Laugh</h4>
+            <p>The kind that's contagious and makes me feel like everything is exactly right.</p>
+          </div>
+          <div class="c-item">
+            <h4>Everything Else</h4>
+            <p>Too many reasons to list. Just know that all of you — every single bit — is why.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </nav>
+  </div>
 
-  <!-- HERO -->
-  <header>
-    <div class="hero">
-      <h1>❤️MAGGIE💍</h1>
-      <p id="typing-text"></p>
-
-      <div class="hero-buttons">
-        <button class="btn" onclick="enterWorld()">Enter Our World</button>
-        <a href="privatepage.html" class="btn btn-outline">Private Page 🔒</a>
+  <!-- ── CHAPTER 3: MEMORIES ── memory match game -->
+  <div class="chapter" id="ch3">
+    <div class="chapter-card">
+      <div class="chapter-header">
+        <div class="chapter-icon">🌸</div>
+        <div class="chapter-label">
+          <h2>Our Memories</h2>
+          <p>Moments I hold close to my heart.</p>
+        </div>
+        <div class="lock-badge" id="lock3">
+          <span class="lock-icon">🔒</span>
+          Locked
+        </div>
       </div>
 
-      <p class="music-note">Our memories. Our moments. Our forever.</p>
-    </div>
-  </header>
-
-  <!-- STORY -->
-  <section id="story">
-    <h2>Our Story</h2>
-    <p class="section-subtitle">
-      Every love story is special, but ours carries its own magic. These are the moments that turned two hearts into one journey.
-    </p>
-
-    <div class="timeline-grid">
-      <div class="card timeline-card">
-        <h3>How We Met</h3>
-        <p>
-          It all started with one moment that looked simple from the outside, but deep down it changed everything. That was the beginning of something beautiful.
-        </p>
+      <div class="game-zone" id="game3">
+        <h3>Memory Match 🃏</h3>
+        <p class="game-desc">Match all the pairs to unlock our memories.</p>
+        <div class="match-grid" id="matchGrid"></div>
+        <div class="game-feedback" id="fb3">Find all 4 pairs!</div>
       </div>
 
-      <div class="card timeline-card">
-        <h3>Our First Connection</h3>
-        <p>
-          The conversations became longer, the smiles became softer, and suddenly your presence started to feel like home.
-        </p>
-      </div>
-
-      <div class="card timeline-card">
-        <h3>Falling in Love</h3>
-        <p>
-          Somewhere between the laughter, the care, and the little moments, my heart made a decision. It chose you.
-        </p>
-      </div>
-
-      <div class="card timeline-card">
-        <h3>Still Us</h3>
-        <p>
-          And now here we are, still growing, still loving, still creating memories I never want to lose.
-        </p>
+      <div class="content-zone" id="content3">
+        <div class="unlocked-badge">✨ Chapter Unlocked!</div>
+        <div class="content-grid">
+          <div class="c-item">
+            <h4>That First Real Moment</h4>
+            <p>The day I realized this was no longer ordinary. Something about you stayed in my mind in the best way.</p>
+          </div>
+          <div class="c-item">
+            <h4>Our Best Laugh</h4>
+            <p>The kind of laugh that makes everything else disappear for a moment.</p>
+          </div>
+          <div class="c-item">
+            <h4>Our Late Talks</h4>
+            <p>Those deep or random conversations that somehow made us feel closer every time.</p>
+          </div>
+          <div class="c-item">
+            <h4>Every Small Thing</h4>
+            <p>It's not only the big events. Even the little things with you matter deeply to me.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- REASONS -->
-  <section id="reasons">
-    <h2>Reasons Why I Love You</h2>
-    <p class="section-subtitle">
-      These are only a few. The real list is endless.
-    </p>
-
-    <div class="reason-grid">
-      <div class="card reason-item">
-        <h3>Your Smile</h3>
-        <p>
-          It changes my whole mood and makes even an ordinary day feel beautiful.
-        </p>
+  <!-- ── CHAPTER 4: OPEN WHEN ── quiz game -->
+  <div class="chapter" id="ch4">
+    <div class="chapter-card">
+      <div class="chapter-header">
+        <div class="chapter-icon">💌</div>
+        <div class="chapter-label">
+          <h2>Open When…</h2>
+          <p>Tiny notes for the moments that matter.</p>
+        </div>
+        <div class="lock-badge" id="lock4">
+          <span class="lock-icon">🔒</span>
+          Locked
+        </div>
       </div>
 
-      <div class="card reason-item">
-        <h3>Your Heart</h3>
-        <p>
-          The way you care, love, and show up makes you rare in the best way.
-        </p>
+      <div class="game-zone" id="game4">
+        <h3>Answer a Question About Us 💭</h3>
+        <p class="game-desc">Answer correctly to unlock these letters for you.</p>
+        <div class="quiz-question" id="quizQ">What's the one thing I always feel when I'm with you?</div>
+        <div class="quiz-options" id="quizOpts">
+          <button class="quiz-opt" onclick="checkQuiz(this, false)">Nervous energy</button>
+          <button class="quiz-opt" onclick="checkQuiz(this, true)">Peace & warmth</button>
+          <button class="quiz-opt" onclick="checkQuiz(this, false)">Indifference</button>
+          <button class="quiz-opt" onclick="checkQuiz(this, false)">Nothing special</button>
+        </div>
+        <div class="game-feedback" id="fb4"></div>
       </div>
 
-      <div class="card reason-item">
-        <h3>Your Presence</h3>
-        <p>
-          You bring peace, comfort, and a kind of warmth that words struggle to explain.
-        </p>
-      </div>
-
-      <div class="card reason-item">
-        <h3>The Way You Love</h3>
-        <p>
-          With you, love feels genuine, soft, strong, and worth protecting.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- OUR MOMENTS -->
-  <section id="gallery">
-    <h2>Our Moments</h2>
-    <p class="section-subtitle">
-      Some memories are too special for the public. I kept them somewhere safer.
-    </p>
-
-    <div style="text-align:center;">
-      <a href="privatepage.html" class="btn">Unlock Our Memories 🔒</a>
-    </div>
-  </section>
-
-  <!-- MEMORIES -->
-  <section id="memories">
-    <h2>Favorite Memories</h2>
-    <p class="section-subtitle">
-      The moments may pass, but the feeling stays.
-    </p>
-
-    <div class="memory-grid">
-      <div class="card memory-item">
-        <h3>That First Real Moment</h3>
-        <p>
-          The day I realized this was no longer ordinary. Something about you stayed in my mind in the best way.
-        </p>
-      </div>
-
-      <div class="card memory-item">
-        <h3>Our Best Laugh</h3>
-        <p>
-          The kind of laugh that makes everything else disappear for a moment.
-        </p>
-      </div>
-
-      <div class="card memory-item">
-        <h3>Our Late Talks</h3>
-        <p>
-          Those deep or random conversations that somehow made us feel closer every time.
-        </p>
-      </div>
-
-      <div class="card memory-item">
-        <h3>Every Small Thing</h3>
-        <p>
-          It is not only the big events. Even the little things with you matter to me.
-        </p>
+      <div class="content-zone" id="content4">
+        <div class="unlocked-badge">✨ Chapter Unlocked!</div>
+        <div class="content-grid">
+          <div class="c-item">
+            <h4>Open when you miss me</h4>
+            <p>Even when I am not near you, my heart is always with you. I miss you too, always. ❤️</p>
+          </div>
+          <div class="c-item">
+            <h4>Open when you're sad</h4>
+            <p>Bad moments do not define you. You are strong, precious, and deeply loved. 💖</p>
+          </div>
+          <div class="c-item">
+            <h4>Open when you need reassurance</h4>
+            <p>You are enough. You are loved. You are wanted. And I will keep choosing you. ❤️</p>
+          </div>
+          <div class="c-item">
+            <h4>Open when you want to smile</h4>
+            <p>You have the kind of smile that could repair a hard day without even trying. 😊</p>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- COUNTER -->
-  <section id="counter">
-    <h2>Our Time Together</h2>
-    <p class="section-subtitle">
-      Set your relationship start date in the JavaScript section below.
-    </p>
-
-    <div class="counter-wrap">
-      <div class="card counter-box">
-        <h3 id="years">1</h3>
-        <p>Years</p>
-      </div>
-      <div class="card counter-box">
-        <h3 id="months">2</h3>
-        <p>Months</p>
-      </div>
-      <div class="card counter-box">
-        <h3 id="days">94</h3>
-        <p>Days</p>
-      </div>
-      <div class="card counter-box">
-        <h3 id="hours">7920</h3>
-        <p>Hours</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- LETTER -->
-  <section id="letter">
-    <h2>My Letter to You</h2>
-    <div class="card letter-card">
-      <p>
-        My love,<br><br>
-        Loving you has become one of the most beautiful parts of my life.
-        You are not just someone I care about. You are my peace, my happiness,
-        and one of the greatest gifts life has placed in my path.<br><br>
-
-        In your presence, things feel lighter. In your smile, I find comfort.
-        In your love, I find something real.<br><br>
-
-        No matter what changes around us, one thing stays constant:
-        I appreciate you, I value you, and I will always be grateful for you.<br><br>
-
-        Thank you for being you.<br>
-        Thank you for being mine. ❤️
-      </p>
-    </div>
-  </section>
-
-  <!-- OPEN WHEN -->
-  <section id="open-when">
-    <h2>Open When...</h2>
-    <p class="section-subtitle">
-      Tiny digital letters for the moments that matter.
-    </p>
-
-    <div class="open-grid">
-      <div class="card open-item">
-        <h3>Open when you miss me</h3>
-        <p>
-          A reminder that distance can never reduce how much you mean to me.
-        </p>
-        <button class="btn" onclick="showOpenMessage('miss')">Open</button>
+  <!-- ── CHAPTER 5: MY LETTER ── fill the love meter -->
+  <div class="chapter" id="ch5">
+    <div class="chapter-card">
+      <div class="chapter-header">
+        <div class="chapter-icon">✉️</div>
+        <div class="chapter-label">
+          <h2>My Letter to You</h2>
+          <p>Words straight from my heart.</p>
+        </div>
+        <div class="lock-badge" id="lock5">
+          <span class="lock-icon">🔒</span>
+          Locked
+        </div>
       </div>
 
-      <div class="card open-item">
-        <h3>Open when you're sad</h3>
-        <p>
-          A small note to remind you that you are deeply loved and never alone.
-        </p>
-        <button class="btn" onclick="showOpenMessage('sad')">Open</button>
+      <div class="game-zone" id="game5">
+        <h3>Fill My Heart 💗</h3>
+        <p class="game-desc">Click the button <strong>20 times</strong> to fill the love meter and unlock my letter.</p>
+        <div class="love-meter-wrap">
+          <div class="love-meter"><div class="love-fill" id="loveFill"></div></div>
+          <div class="love-count"><span id="loveCount">0</span>/20 💜</div>
+        </div>
+        <button class="click-btn" id="loveBtn" onclick="fillLove()">Send Love 💜</button>
+        <div class="game-feedback" id="fb5">Keep clicking! 💝</div>
       </div>
 
-      <div class="card open-item">
-        <h3>Open when you need reassurance</h3>
-        <p>
-          For those moments when your heart needs to hear something soft and true.
-        </p>
-        <button class="btn" onclick="showOpenMessage('reassure')">Open</button>
-      </div>
+      <div class="content-zone" id="content5">
+        <div class="unlocked-badge">✨ Final Chapter Unlocked!</div>
+        <div class="letter-body">
+          My love,<br><br>
+          Loving you has become one of the most beautiful parts of my life.
+          You are not just someone I care about — you are my peace, my happiness,
+          and one of the greatest gifts life has ever placed in my path.<br><br>
 
-      <div class="card open-item">
-        <h3>Open when you want to smile</h3>
-        <p>
-          Just in case you need a reason to smile a little wider today.
-        </p>
-        <button class="btn" onclick="showOpenMessage('smile')">Open</button>
+          In your presence, things feel lighter. In your smile, I find comfort.
+          In your love, I find something real and rare.<br><br>
+
+          No matter what changes around us, one thing stays constant:
+          I appreciate you, I value you, and I will always be grateful that you are mine.<br><br>
+
+          You are my favorite person, my favorite place, and my favorite feeling.<br><br>
+
+          Thank you for being you.<br>
+          Thank you for being mine. ❤️<br><br>
+          — Always yours
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- LOVE GAME -->
-  <section id="love-game">
-    <h2>Catch My Love ❤️</h2>
-    <p class="section-subtitle">
-      Tap the falling hearts and see what unlocks for you.
-    </p>
+</div>
 
-    <div class="card" id="gameArea">
-      <p id="gameScore">Score: <span id="score">0</span></p>
-      <p class="game-note">
-        Catch as many hearts as you can. At 10 and 20, something sweet unlocks.
-      </p>
-      <div id="gameUnlock"></div>
-    </div>
-  </section>
+<footer>
+  Made with <span>♥</span> for someone truly irreplaceable
+</footer>
 
-  <!-- SURPRISE -->
-  <section id="surprise">
-    <h2>A Little Surprise</h2>
-    <div class="card surprise-box">
-      <button class="btn" onclick="showSecretMessage()">Click Me</button>
-      <p id="secretMessage">
-        Out of all the people in the world, my heart is still happiest with you. You are my favorite place, my favorite feeling, and my favorite forever. 💖
-      </p>
-    </div>
-  </section>
+<script>
+  // ── Floating particles ──
+  const pWrap = document.getElementById('particles');
+  for (let i = 0; i < 14; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const sz = Math.random() * 200 + 80;
+    p.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;animation-duration:${Math.random()*18+12}s;animation-delay:${Math.random()*10}s;`;
+    pWrap.appendChild(p);
+  }
 
-  <footer>
-    Made with love for someone truly special ❤️
-  </footer>
+  // ── Start journey ──
+  function startJourney() {
+    document.querySelector('header').style.minHeight = '60vh';
+    document.getElementById('journey').style.display = 'block';
+    document.getElementById('journey').scrollIntoView({ behavior: 'smooth' });
+    initTapGame();
+    initMatchGame();
+  }
 
-  <script>
-    // MOBILE MENU
-    function toggleMenu() {
-      document.getElementById("navLinks").classList.toggle("show");
+  // ── Unlock helper ──
+  function unlock(n) {
+    document.getElementById('game'+n).style.display = 'none';
+    const lock = document.getElementById('lock'+n);
+    lock.innerHTML = '<span class="lock-icon">✅</span>Unlocked';
+    lock.style.background = 'rgba(100,200,100,0.15)';
+    lock.style.borderColor = 'rgba(100,220,100,0.3)';
+    lock.style.color = '#a8ffb0';
+    document.getElementById('content'+n).classList.add('show');
+    confettiBurst();
+    // Scroll to next after delay
+    setTimeout(() => {
+      const next = document.getElementById('ch'+(n+1));
+      if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 800);
+  }
+
+  // ── Confetti ──
+  function confettiBurst() {
+    const colors = ['#7b2ff7','#f472b6','#dcc4ff','#a8ffb0','#ffd166'];
+    for (let i = 0; i < 30; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.cssText = `left:${Math.random()*100}vw;top:${Math.random()*50}vh;background:${colors[i%colors.length]};animation-delay:${Math.random()*0.4}s;`;
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 2000);
     }
+  }
 
-    document.querySelectorAll("#navLinks a").forEach(link => {
-      link.addEventListener("click", () => {
-        document.getElementById("navLinks").classList.remove("show");
-      });
-    });
+  // ── Floating hearts ──
+  setInterval(() => {
+    const h = document.createElement('div');
+    h.className = 'floaty-heart';
+    h.textContent = ['💜','🌸','✨','💫','💖'][Math.floor(Math.random()*5)];
+    h.style.cssText = `left:${Math.random()*100}vw;bottom:0;animation-duration:${Math.random()*3+5}s;font-size:${Math.random()*14+12}px;`;
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 9000);
+  }, 600);
 
-    // MUSIC
-    const music = document.getElementById("bg-music");
+  // ═══════════════════════════
+  // GAME 1: TAP HEARTS
+  // ═══════════════════════════
+  let tapCount = 0;
+  let tapInterval = null;
 
-    function enterWorld() {
-      music.play().then(() => {
-        document.getElementById("story").scrollIntoView({ behavior: "smooth" });
-      }).catch(error => {
-        console.log("Music failed to play:", error);
-        alert("Music could not start. Check whether the browser can play this mp3 file.");
-        document.getElementById("story").scrollIntoView({ behavior: "smooth" });
-      });
+  function initTapGame() {
+    tapInterval = setInterval(() => spawnTapHeart(), 700);
+  }
+
+  function spawnTapHeart() {
+    const arena = document.getElementById('tapArena1');
+    if (!arena || document.getElementById('content1').classList.contains('show')) {
+      clearInterval(tapInterval); return;
     }
-
-    // SCROLL ANIMATION
-    const sections = document.querySelectorAll("section");
-
-    function revealSections() {
-      sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        if (sectionTop < window.innerHeight - 100) {
-          section.classList.add("show");
-        }
-      });
-    }
-
-    window.addEventListener("scroll", revealSections);
-    revealSections();
-
-    // RELATIONSHIP COUNTER
-    const relationshipStartDate = new Date("2024-01-01T00:00:00");
-
-    function updateRelationshipCounter() {
-      const now = new Date();
-      const diff = now - relationshipStartDate;
-
-      const totalHours = Math.floor(diff / (1000 * 60 * 60));
-      const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const years = Math.floor(totalDays / 365);
-      const months = Math.floor((totalDays % 365) / 30);
-      const days = Math.floor((totalDays % 365) % 30);
-      const hours = totalHours % 24;
-
-      document.getElementById("years").textContent = years;
-      document.getElementById("months").textContent = months;
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-    }
-
-    updateRelationshipCounter();
-    setInterval(updateRelationshipCounter, 1000);
-
-    // OPEN WHEN MESSAGES
-    function showOpenMessage(type) {
-      let message = "";
-
-      if (type === "miss") {
-        message = "Even when I am not near you, my heart is always with you. I miss you too, always. ❤️";
-      } else if (type === "sad") {
-        message = "Bad moments do not define you. You are strong, precious, and deeply loved. 💖";
-      } else if (type === "reassure") {
-        message = "You are enough. You are loved. You are wanted. And I will keep choosing you. ❤️";
-      } else if (type === "smile") {
-        message = "You have the kind of smile that could repair a hard day without even trying. 😊";
+    const h = document.createElement('div');
+    h.className = 'tap-target';
+    h.textContent = ['💜','💖','💗','💝'][Math.floor(Math.random()*4)];
+    h.style.left = Math.random() * 80 + '%';
+    h.style.top = Math.random() * 60 + '%';
+    arena.appendChild(h);
+    h.addEventListener('pointerdown', () => {
+      h.remove();
+      tapCount++;
+      const pct = (tapCount/10)*100;
+      document.getElementById('tapFill1').style.width = Math.min(pct,100)+'%';
+      if (tapCount >= 10) {
+        document.getElementById('fb1').textContent = '🎉 You caught them all!';
+        document.getElementById('fb1').className = 'game-feedback good';
+        clearInterval(tapInterval);
+        setTimeout(() => unlock(1), 600);
       }
+    });
+    setTimeout(() => h.remove(), 2200);
+  }
 
-      alert(message);
+  // ═══════════════════════════
+  // GAME 2: WORD SCRAMBLE
+  // ═══════════════════════════
+  const scrambles = [
+    { scrambled: 'M A G G I E', answer: 'MAGGIE' },
+  ];
+  let currentScramble = scrambles[0];
+
+  // Show letters scattered
+  function checkScramble(val) {
+    const clean = val.trim().toUpperCase().replace(/\s/g,'');
+    if (clean === currentScramble.answer) {
+      document.getElementById('fb2').textContent = '💜 Yes! That\'s you!';
+      document.getElementById('fb2').className = 'game-feedback good';
+      document.getElementById('scrambleInput').disabled = true;
+      setTimeout(() => unlock(2), 600);
     }
+  }
 
-    // LOVE GAME
-    let score = 0;
+  // ═══════════════════════════
+  // GAME 3: MEMORY MATCH
+  // ═══════════════════════════
+  const emojis = ['🌸','💜','✨','💫'];
+  let cards = [...emojis, ...emojis];
+  let flipped = [], matched = 0, canFlip = true;
 
-    function createGameHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("game-heart");
-      heart.innerHTML = "💜";
-      heart.style.left = Math.random() * 90 + "vw";
-      heart.style.animationDuration = (Math.random() * 3 + 2.5) + "s";
-      document.body.appendChild(heart);
+  function initMatchGame() {
+    cards = cards.sort(() => Math.random() - 0.5);
+    const grid = document.getElementById('matchGrid');
+    grid.innerHTML = '';
+    cards.forEach((e, i) => {
+      const card = document.createElement('div');
+      card.className = 'match-card';
+      card.dataset.emoji = e;
+      card.dataset.index = i;
+      card.textContent = '💜';
+      card.addEventListener('click', () => flipCard(card));
+      grid.appendChild(card);
+    });
+  }
 
-      heart.onclick = () => {
-        score++;
-        document.getElementById("score").innerText = score;
-        heart.remove();
+  function flipCard(card) {
+    if (!canFlip || card.classList.contains('matched') || card.classList.contains('flipped')) return;
+    card.classList.add('flipped');
+    card.textContent = card.dataset.emoji;
+    flipped.push(card);
+    if (flipped.length === 2) {
+      canFlip = false;
+      setTimeout(checkMatch, 700);
+    }
+  }
 
-        if (score === 10) {
-          const unlock = document.getElementById("gameUnlock");
-          unlock.classList.add("show");
-          unlock.innerHTML = "You unlocked my first truth: even on normal days, my heart still finds you first. 💜";
-        }
+  function checkMatch() {
+    const [a, b] = flipped;
+    if (a.dataset.emoji === b.dataset.emoji) {
+      a.classList.add('matched'); b.classList.add('matched');
+      matched++;
+      document.getElementById('fb3').textContent = `${matched}/4 pairs found! 🎉`;
+      if (matched === 4) {
+        document.getElementById('fb3').className = 'game-feedback good';
+        setTimeout(() => unlock(3), 600);
+      }
+    } else {
+      a.textContent = '💜'; b.textContent = '💜';
+      a.classList.remove('flipped'); b.classList.remove('flipped');
+    }
+    flipped = [];
+    canFlip = true;
+  }
 
-        if (score === 20) {
-          const unlock = document.getElementById("gameUnlock");
-          unlock.classList.add("show");
-          unlock.innerHTML = "You unlocked the deeper truth: no matter how many hearts you catch, the real one has been yours for a long time. ❤️";
-        }
-      };
-
+  // ═══════════════════════════
+  // GAME 4: QUIZ
+  // ═══════════════════════════
+  function checkQuiz(btn, correct) {
+    document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+    if (correct) {
+      btn.classList.add('correct');
+      document.getElementById('fb4').textContent = '💜 Exactly right!';
+      document.getElementById('fb4').className = 'game-feedback good';
+      setTimeout(() => unlock(4), 700);
+    } else {
+      btn.classList.add('wrong');
+      document.getElementById('fb4').textContent = 'Hmm, try again? 😊';
       setTimeout(() => {
-        heart.remove();
-      }, 6000);
+        document.querySelectorAll('.quiz-opt').forEach(b => { b.disabled = false; b.classList.remove('wrong'); });
+        document.getElementById('fb4').textContent = '';
+      }, 1000);
     }
+  }
 
-    setInterval(createGameHeart, 900);
+  // ═══════════════════════════
+  // GAME 5: FILL THE LOVE METER
+  // ═══════════════════════════
+  let loveClicks = 0;
+  const loveMessages = [
+    'Keep going! 💪','More love! 💜','Almost there! 💫','You\'re doing amazing! 💖','So close! 🌸'];
 
-    // SURPRISE MESSAGE
-    function showSecretMessage() {
-      const secretMessage = document.getElementById("secretMessage");
-      secretMessage.style.display = "block";
+  function fillLove() {
+    loveClicks++;
+    const pct = (loveClicks / 20) * 100;
+    document.getElementById('loveFill').style.width = Math.min(pct,100) + '%';
+    document.getElementById('loveCount').textContent = loveClicks;
+    document.getElementById('fb5').textContent = loveMessages[Math.floor(Math.random()*loveMessages.length)];
+    if (loveClicks >= 20) {
+      document.getElementById('fb5').textContent = '💜 My heart is full because of you!';
+      document.getElementById('fb5').className = 'game-feedback good';
+      document.getElementById('loveBtn').disabled = true;
+      setTimeout(() => unlock(5), 600);
     }
-
-    // FLOATING HEARTS
-    function createHearts() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "💜";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 14 + "px";
-      heart.style.animationDuration = Math.random() * 3 + 4 + "s";
-      document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 7000);
-    }
-
-    setInterval(createHearts, 350);
-  </script>
+  }
+</script>
 </body>
 </html>
