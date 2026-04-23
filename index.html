@@ -496,6 +496,161 @@
       color: rgba(255,255,255,0.85);
     }
 
+    /* ── PRIVATE PORTAL ── */
+    .private-portal {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 20px;
+      z-index: 2;
+    }
+
+    .portal-glow {
+      position: absolute;
+      width: 500px;
+      height: 220px;
+      background: radial-gradient(ellipse, rgba(178,69,255,0.22) 0%, rgba(123,47,247,0.10) 50%, transparent 75%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: portalPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes portalPulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50%       { transform: scale(1.12); opacity: 1; }
+    }
+
+    .portal-inner { text-align: center; position: relative; z-index: 1; }
+
+    .portal-whisper {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .private-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    /* Animated rings */
+    .private-btn-ring {
+      position: absolute;
+      inset: -14px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(178,69,255,0.35);
+      animation: ringPulse 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .private-btn-ring.ring2 {
+      inset: -26px;
+      border-color: rgba(178,69,255,0.18);
+      animation-delay: 0.6s;
+    }
+
+    @keyframes ringPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50%       { transform: scale(1.04); opacity: 1; }
+    }
+
+    /* Main pill */
+    .private-btn-content {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 36px;
+      background: linear-gradient(135deg, rgba(40,0,80,0.85), rgba(20,0,50,0.95));
+      border: 1px solid rgba(178,69,255,0.45);
+      border-radius: 999px;
+      box-shadow:
+        0 0 0 1px rgba(178,69,255,0.15),
+        0 20px 60px rgba(123,47,247,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+      transition: 0.4s ease;
+    }
+
+    /* Shimmer sweep */
+    .private-btn-content::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+      animation: shimmer 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      0%   { left: -100%; }
+      100% { left: 160%; }
+    }
+
+    .private-btn:hover .private-btn-content {
+      border-color: rgba(220,196,255,0.65);
+      box-shadow:
+        0 0 0 1px rgba(178,69,255,0.3),
+        0 28px 70px rgba(123,47,247,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    .key-icon {
+      font-size: 1.7rem;
+      filter: drop-shadow(0 0 8px rgba(220,196,255,0.6));
+      animation: keyWiggle 3s ease-in-out infinite;
+    }
+
+    @keyframes keyWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      20%       { transform: rotate(-12deg); }
+      40%       { transform: rotate(10deg); }
+      60%       { transform: rotate(-6deg); }
+      80%       { transform: rotate(4deg); }
+    }
+
+    .btn-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      gap: 2px;
+    }
+
+    .btn-text strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--lavender);
+      letter-spacing: 0.3px;
+    }
+
+    .btn-text small {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.5px;
+    }
+
+    .arrow-icon {
+      font-size: 1.1rem;
+      color: rgba(220,196,255,0.6);
+      animation: arrowPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes arrowPulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.3) rotate(15deg); }
+    }
+
     /* ── FOOTER ── */
     footer {
       text-align: center;
@@ -582,19 +737,19 @@
         <div class="content-grid">
           <div class="c-item">
             <h4>How We Met</h4>
-            <p>IIf u can remember it was in a Work Ethic class, na ulikam ukiwa ume chelewa 😂uka sit next to me. Your mum called nikakuambia unapigiwa na chali yko😂😂</p>
+            <p>It all started with one moment that looked simple from the outside, but deep down it changed everything. That was the beginning of something beautiful.</p>
           </div>
           <div class="c-item">
             <h4>Our First Connection</h4>
-            <p>The conversations became longer ile time nilikuita tukiwa shule na i asked for your number ukanipea. at first ulikuwa umekata but lastly i succeded💜💍</p>
+            <p>The conversations became longer, the smiles became softer, and suddenly your presence started to feel like home.</p>
           </div>
           <div class="c-item">
             <h4>Falling in Love</h4>
-            <p>Somewhere between the laughter, the care, and the little moments, my heart made a decision. It chose you. later through some mind ganes and late nyt talks i managed to win your heart also.❤️</p>
+            <p>Somewhere between the laughter, the care, and the little moments, my heart made a decision. It chose you.</p>
           </div>
           <div class="c-item">
             <h4>Still Us</h4>
-            <p>And now here we are — still growing, still loving, still creating memories I never want to lose. lets keep pushing, we are here for each other and like i always say we here to help one another. Much love from this side😘😍</p>
+            <p>And now here we are — still growing, still loving, still creating memories I never want to lose.</p>
           </div>
         </div>
       </div>
@@ -805,6 +960,26 @@
     </div>
   </div>
 
+</div>
+
+<!-- ══ PRIVATE PAGE PORTAL ══ -->
+<div class="private-portal">
+  <div class="portal-glow"></div>
+  <div class="portal-inner">
+    <p class="portal-whisper">psst… there's one more place just for you</p>
+    <a href="privatepage.html" class="private-btn">
+      <span class="private-btn-ring"></span>
+      <span class="private-btn-ring ring2"></span>
+      <span class="private-btn-content">
+        <span class="key-icon">🗝️</span>
+        <span class="btn-text">
+          <strong>Our Private World</strong>
+          <small>Only you can enter here</small>
+        </span>
+        <span class="arrow-icon">✦</span>
+      </span>
+    </a>
+  </div>
 </div>
 
 <footer>
